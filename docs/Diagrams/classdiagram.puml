@@ -25,12 +25,13 @@ class Game {
 class Suggestion {
   - suggestionId: Long
   - game: Game
+  - rating : Rating
   - timestamp: LocalDateTime
 }
 
 class Rating {
   - ratingId: Long
-  - score: int (1..5)
+  - score: int
   - timestamp: LocalDateTime
 }
 }
@@ -71,7 +72,6 @@ class SteamAPIService {
 
 class SuggestionService {
   + generateSuggestion(user: User): Suggestion
-  + saveRating(user: User, suggestion: Suggestion, score: int): Rating
 }
 }
 
@@ -81,12 +81,12 @@ class SuggestionService {
 ' =======================
 package Controllers{
 class UserController {
-  + login(username: String, password: String): Response
+  + login(username: String, password: String): User
   + logout(): void
 }
 class SuggestionController {
   + getSuggestion(steamId: String): Suggestion
-  + rateSuggestion(suggestionId: Long, score: int): Response
+  + saveRating(user: User, suggestion: Suggestion): Suggestion
 }
 }
 
@@ -120,6 +120,7 @@ Persistence --> entities
 DTOs --> entities
 Main --> Routes
 Routes --> UserController
+Controllers --> Persistence
 
 
 @enduml
