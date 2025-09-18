@@ -1,0 +1,25 @@
+Name:
+Suggest random game for playing
+
+Primary Actors:
+User
+
+Secondary Actors:
+Steam
+API
+APP
+
+Preconditions:
+Internet connection
+Valid user link / ID
+
+Basic flow of events:
+1. User clicks for a random suggestion
+2. App selects random number based on library size
+3. App displays random game
+
+Alternative flows:
+1a. Steam API is down
+    1a1. Display error message
+2a. App selects an invalid game
+    2a1. Too bad try again

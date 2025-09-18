@@ -1,0 +1,22 @@
+<configuration>
+    <!-- Suppress debug logs from Testcontainers -->
+    <logger name="org.testcontainers" level="INFO"/>
+    <logger name="org.testcontainers.utility" level="WARN"/>
+    <logger name="docker" level="WARN"/>
+
+    <!-- Optional: Reduce Hibernate verbosity -->
+    <logger name="org.hibernate.SQL" level="WARN"/>
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="WARN"/>
+    <logger name="org.hibernate.engine.jdbc.batch.internal.BatchingBatch" level="ERROR"/>
+
+    <!-- Console Appender -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%level] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

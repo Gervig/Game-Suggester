@@ -1,0 +1,30 @@
+Name:
+Check and import/update Library
+
+Primary Actors:
+User
+
+Secondary Actors:
+Steam
+API
+APP
+
+Preconditions:
+Internet connection
+Valid user link / ID ?
+
+Basic flow of events:
+1. User links profile
+2. Link / ID is validated
+3. API sends user data
+4. App displays success (make a design choice!)
+
+Alternative flows:
+2a. Steam API is down
+    2a1. Display error message
+2b. Link / ID is not valid
+    2b1. App displays error message (invalid ID)
+2c. Profile is private
+    2c1. App displays message (private profile)
+3a. Empty library
+    3a1. App displays message (empty library)
