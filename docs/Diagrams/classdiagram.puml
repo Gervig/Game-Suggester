@@ -1,0 +1,125 @@
+@startuml
+
+package entities {
+' =======================
+' MODEL (JPA Entities)
+' =======================
+class User {
+  - userId: Long
+  - username: String
+  - steamId: String
+  - passwordHash: String
+  - registeredUser: Boolean
+  - suggestions : List<Suggestion>
+  + getSuggestions(): List<Suggestion>
+}
+
+class Game {
+  - appId: String
+  - title: String
+  - genre: String
+  - playtime: int
+  - steamLink: String
+}
+
+class Suggestion {
+  - suggestionId: Long
+  - game: Game
+  - timestamp: LocalDateTime
+}
+
+class Rating {
+  - ratingId: Long
+  - score: int (1..5)
+  - timestamp: LocalDateTime
+}
+}
+
+' =======================
+' MODEL (DTOs)
+' =======================
+
+package DTOs {
+
+class UserDTO{}
+class SuggestionDTO{}
+class GameDTO{}
+
+}
+
+' =======================
+' REPOSITORIES (JPA)
+' =======================
+package Persistence {
+class UserDAO {
+   + CRUD()
+  + findByUsername(username: String): User
+}
+class SuggestionDAO {
+  + CRUD()
+}
+}
+
+
+' =======================
+' SERVICES
+' =======================
+package Service  {
+class SteamAPIService {
+  + fetchGames(steamId: String): List<GameDTO>
+}
+
+class SuggestionService {
+  + generateSuggestion(user: User): Suggestion
+  + saveRating(user: User, suggestion: Suggestion, score: int): Rating
+}
+}
+
+
+' =======================
+' CONTROLLERS (MVC)
+' =======================
+package Controllers{
+class UserController {
+  + login(username: String, password: String): Response
+  + logout(): void
+}
+class SuggestionController {
+  + getSuggestion(steamId: String): Suggestion
+  + rateSuggestion(suggestionId: Long, score: int): Response
+}
+}
+
+
+
+class Routes{
+- {static} controllers
+}
+
+class Main{
++ emf : EntityManagerFactory
++ main(String[] args)
+}
+
+' =======================
+' RELATIONSHIPS
+' =======================
+User "1" --> "0..*" Suggestion
+Suggestion "1" --> "1" Game
+Suggestion "1" --> "0..*" Rating
+Rating "1" --> "1" Suggestion
+
+SuggestionController --> SuggestionService
+
+
+SuggestionService --> SteamAPIService
+SteamAPIService --> GameDTO
+
+UserController --> DTOs
+Persistence --> entities
+DTOs --> entities
+Main --> Routes
+Routes --> UserController
+
+
+@enduml
