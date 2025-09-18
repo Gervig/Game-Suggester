@@ -12,6 +12,7 @@ class User {
   - registeredUser: Boolean
   - suggestions : List<Suggestion>
   + getSuggestions(): List<Suggestion>
+  + addSuggestion() : void
 }
 
 class Game {
