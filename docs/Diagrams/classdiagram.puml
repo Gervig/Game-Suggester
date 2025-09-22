@@ -68,7 +68,7 @@ class SuggestionDAO {
 ' =======================
 package Service  {
 class SteamAPIService {
-  + fetchGames(steamId: String): List<GameDTO>
+  + retrieveGames(steamId: String): List<GameDTO>
 }
 
 class SuggestionService {
