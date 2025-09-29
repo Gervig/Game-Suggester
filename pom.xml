@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>app</groupId>
-    <artifactId>4 sem sys</artifactId>
+    <artifactId>game-suggester</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
